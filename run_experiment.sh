@@ -26,7 +26,7 @@ source Anchor/bin/activate
 
 # Install requirements
 echo "Installing dependencies..."
-pip install -q -r requirements.txt
+pip3 install -q -r requirements.txt
 
 # Ask user what to run
 echo ""
@@ -40,19 +40,19 @@ read -p "Enter choice [1-4]: " choice
 case $choice in
     1)
         echo "Running full pipeline..."
-        python main.py --mode full
+        python3 main.py --mode full
         ;;
     2)
         echo "Running quick test (3 samples)..."
-        python main.py --mode full --max-samples 3
+        python3 main.py --mode full --max-samples 3
         ;;
     3)
         echo "Running data preparation..."
-        python main.py --mode data
+        python3 main.py --mode data
         ;;
     4)
         echo "Generating visualizations..."
-        python main.py --mode viz
+        python3 main.py --mode viz
         ;;
     *)
         echo "Invalid choice. Exiting."

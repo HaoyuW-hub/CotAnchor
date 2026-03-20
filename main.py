@@ -5,6 +5,8 @@ Run the complete pilot experiment pipeline
 
 import argparse
 from pathlib import Path
+import os
+os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'
 
 # Import modules
 from config import RESULTS_DIR, FIGURES_DIR

@@ -2,7 +2,8 @@
 Model Utilities
 Load model and extract hidden states
 """
-
+import os
+os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'
 import torch
 import numpy as np
 from transformers import AutoTokenizer, AutoModelForCausalLM

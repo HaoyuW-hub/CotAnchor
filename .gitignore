@@ -57,3 +57,4 @@ Thumbs.db
 # Data (if large)
 data/*.json
 data/*.csv
+models/prime_probe.pkl
