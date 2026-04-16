@@ -24,11 +24,9 @@ def is_prime(n: int) -> bool:
 
 def generate_prompt(number: int, is_prime_num: bool) -> str:
     """Generate a prompt for a given number"""
-    prime_or_composite = "a prime number" if is_prime_num else "a composite number"
-    return PROMPT_TEMPLATE.format(
-        number=number,
-        prime_or_composite=prime_or_composite
-    )
+    # Note: We no longer reveal if it's prime or composite in the prompt
+    # The model needs to discover this through systematic factorization attempts
+    return PROMPT_TEMPLATE.format(number=number)
 
 
 def create_dataset() -> List[Dict]:

@@ -172,7 +172,8 @@ class ModelWrapper:
     def get_initial_representation(
         self,
         prompt: str,
-        layer: int = TARGET_LAYER
+        layer: int = TARGET_LAYER,
+        target_text: str = None
     ) -> np.ndarray:
         """
         Get initial hidden state representation after processing the prompt
@@ -180,12 +181,27 @@ class ModelWrapper:
         Args:
             prompt: Input prompt
             layer: Which layer to extract from
+            target_text: If provided, extract hidden state at the last token
+                         of this substring within the prompt (e.g., the number).
+                         Falls back to last token if not found.
 
         Returns:
             Hidden state vector as numpy array
         """
         inputs = self.tokenizer(prompt, return_tensors="pt").to(self.device)
-        hidden_state = self.extract_hidden_state(inputs.input_ids, layer, position=-1)
+
+        position = -1  # default: last token
+        if target_text is not None:
+            idx = prompt.find(target_text)
+            if idx != -1:
+                # Tokenize the prefix up to and including target_text
+                prefix = prompt[:idx + len(target_text)]
+                prefix_ids = self.tokenizer(prefix, return_tensors="pt").input_ids
+                position = prefix_ids.shape[1] - 1  # last token of target_text
+            else:
+                print(f"Warning: '{target_text}' not found in prompt, falling back to last token")
+
+        hidden_state = self.extract_hidden_state(inputs.input_ids, layer, position=position)
         return hidden_state.numpy()
 
     def cleanup(self):
