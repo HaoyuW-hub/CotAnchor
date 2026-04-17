@@ -3,6 +3,12 @@ Test script for multi-position probe training
 Tests with a small subset of data to verify correctness
 """
 
+import sys
+from pathlib import Path
+# Add parent directory to path to import from CotAnchor root
+parent_dir = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(parent_dir))
+
 import numpy as np
 import torch
 from probe_training_multilayer import (

@@ -3,10 +3,15 @@ Analysis script for trained multi-position probes
 Provides detailed analysis and additional visualizations
 """
 
+import sys
+from pathlib import Path
+# Add parent directory to path to import from CotAnchor root
+parent_dir = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(parent_dir))
+
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from pathlib import Path
 import json
 
 from probe_training_multilayer import MultiPositionProbe
