@@ -39,6 +39,7 @@ class ModelWrapper:
             self.tokenizer.pad_token = self.tokenizer.eos_token
 
         # Load model
+        print("Loading model weights (this may take 1-2 minutes)...")
         self.model = AutoModelForCausalLM.from_pretrained(
             self.model_name,
             token=HF_TOKEN,
