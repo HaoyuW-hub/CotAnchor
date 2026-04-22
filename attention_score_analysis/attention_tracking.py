@@ -152,7 +152,7 @@ def run_experiment(
         # nan-safe accumulation: only add where values are finite
         finite_mask = np.isfinite(attn_array[:effective])
         attn_sum[:effective] += np.where(finite_mask, attn_array[:effective], 0.0)
-        valid_counts[:effective] += 1
+        valid_counts[:effective] += finite_mask.any(axis=1).astype(np.int64)
 
         per_sample_results.append({
             "index": idx,

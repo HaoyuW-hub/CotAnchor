@@ -46,7 +46,8 @@ class ModelWrapper:
             trust_remote_code=True,
             torch_dtype=torch.float16 if self.device == "cuda" else torch.float32,
             device_map="auto" if self.device == "cuda" else None,
-            output_hidden_states=True
+            output_hidden_states=True,
+            attn_implementation="eager",
         )
 
         if self.device != "cuda":
